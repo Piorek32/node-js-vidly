@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+<link rel="stylesheet" href="/style.css">
+
+<body>
+  <h1></h1>
+  <!-- <a href="">link</a> -->
+  <section class="containerForm">
+  <form class="form" action="">
+    <div>
+      <input class="name" name="name" type="text" autocomplete="off" required />
+      <label for="name">
+        <span>name</span>
+      </label>
+    </div>
+    <div>
+     
+      <input class="email" name="email" type="text" autocomplete="off" required />
+      <label for="name">
+        <span>email</span>
+      </label>
+    </div>
+    <div>
+      
+      <input class="password" name="password" type="password" autocomplete="off" required />
+      <label for="name">
+        <span>password</span>
+      </label>
+    </div>
+    <div class="submit_btn_box">
+      <button class="submit_btn" type="submit">utwórz użytkownika</button>
+    </div>
+  </form>
+  </section>
+  <script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", e => {
+      const name = document.querySelector(".name").value;
+      const email = document.querySelector(".email").value;
+      const password = document.querySelector(".password").value;
+      e.preventDefault();
+
+      const user = {
+        name,
+        email,
+        password
+      };
+      console.log(post);
+
+
+      fetch("http://localhost:3000/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(user)
+      })
+        .then(res => JSON.stringify(res))
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    });
+
+    // const pram =  new URLSearchParams({
+    //     name : "parametr"
+
+    // });
+
+    let url = "contact/125";
+    //   let link = document.querySelector('a')
+    // link.setAttribute('href', url)
+  </script>
+</body>
