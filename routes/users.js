@@ -4,14 +4,28 @@ const express = require("express");
 const router = express.Router();
 const { User, validate } = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const authToken = require("../middleware/token");
+
+router.get("/me", authToken, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  res.send(user);
+});
 
 router.post("/", async (req, res) => {
-  console.log('rejestracja')
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error)
+    return res.status(400).send({
+      error: error.details[0].message
+    });
 
-  let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).send("user already exist");
+  try {
+    let user = await User.findOne({ email: req.body.email });
+    if (user) return res.status(400).send({ error: "user already exist" });
+  } catch (error) {
+    res.status(500).send({ error: "something wrong" });
+  }
 
   user = new User({
     name: req.body.name,
@@ -23,7 +37,13 @@ router.post("/", async (req, res) => {
   user.password = pass;
 
   user = await user.save();
-  res.send(_.pick(user, ["name", "email"]));
+  const token = user.userToken();
+  console.log(token)
+  res
+    .header("x-auth-token", token)
+    .send({ user: _.pick(user, ["name", "email"]),
+            token : token
+  });
 });
 
 module.exports = router;

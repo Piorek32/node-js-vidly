@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-
+    console.log(req.body)
 
   const { error } = validate(req.body);
   if (error) return res.send(error.details[0].message);
@@ -20,7 +20,8 @@ router.post("/", async (req, res) => {
   const customer = new Customer({
     isGold: req.body.isGold,
     name: req.body.name,
-    phone: req.body.phone
+    phone: req.body.phone,
+    rentals : ""
   });
   let result =  await customer.save();
 

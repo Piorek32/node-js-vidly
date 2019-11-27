@@ -1,5 +1,49 @@
 
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
+.logo_link {
+  
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.main_nav {
+    display: flex;
+    width: 100%;
+    background-color: black;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+.main_nav ul {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+
+.main_nav ul li {
+    list-style: none;
+    padding: 20px;
+}
+
+li a {
+    font-size: 24px;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+}
 .containerForm {
     display: flex;
     justify-content: center;
@@ -71,8 +115,20 @@ padding: 20px;
 border-radius: 50px;
 display: inline-block;
 border: none;
-transition: all 0.4s ease 0s;
+
 }
+
+
+.submit_btn:hover {
+    color: #60a3bc !important;
+    background: #fff;
+    border: 1px solid #60a3bc;
+    transition: all 0.4s ease 0s;
+}
+
+
+
+
 
 
 
@@ -83,3 +139,15 @@ form input:focus + label span, form input:valid + label span  {
 form input:focus + label::after  {
     width: 100%;
 }
+
+.success {
+    padding: 20px;
+  
+    display: flex;
+    justify-content: center;
+    color: red;
+    display: flex;
+    justify-content: center;
+}
+
+

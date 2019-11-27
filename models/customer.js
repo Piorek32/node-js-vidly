@@ -4,7 +4,11 @@ const Joi = require("@hapi/joi");
 const customerSchema = mongose.Schema({
     isGold: Boolean,
     name: String,
-    phone: Number
+    phone: Number,
+    rentals : {
+      type : [String],
+      require : false
+    }
   });
   const Customer = new mongose.model("Customer", customerSchema);
 

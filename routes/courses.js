@@ -1,22 +1,27 @@
+const winston = require('winston')
 const expres = require("express");
+require('express-async-errors')
 const router = require("express").Router();
 const mongose = require("mongoose");
+const asyncError = require('../middleware/asyncErrorHandling')
 const { Genre, validate } = require('../models/genre')
-
-mongose
-  .connect("mongodb://localhost/vidlly")
-  .then(() => console.log("mondodb conect"))
-  .catch(() => console.log("mondodb error to conect"));
+const authToken = require('../middleware/token')
+const isAdmin = require('../middleware/isAdmin')
 
 
 
-router.get("/", async (req, res) => {
-  const genres = await Genre.find().sort({ name: 1 });
-  res.send(genres);
+
+
+
+
+router.get("/",  async(req, res, next) => {
+ console.log("get")
+    const genres = await Genre.find().sort({ name: 1 });
+    res.send(genres);    
 });
 
-router.post("/", async (req, res) => {
- 
+router.post("/",authToken, async (req, res) => {
+  console.log(req.user)
   const { error } = validate(req.body);
   if (error) return res.send(error.details[0].message);
   const genere = new Genre({
@@ -50,7 +55,7 @@ router.put("/:id", async (req, res) => {
   res.send(genre);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", [authToken, isAdmin], async (req, res) => {
   const genre = await Genre.findByIdAndRemove(req.params.id);
   if (!genre) return res.status(404).send("nie ma tkiego id");
 

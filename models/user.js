@@ -1,10 +1,10 @@
 const Joi = require("@hapi/joi");
 const PasswordComplexity = require('joi-password-complexity');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken')
+const config = require('config')
 
-
-
-const User =  mongoose.model('users' , new mongoose.Schema({
+const usersSchema = new mongoose.Schema({
     name : {
         type: String,
         require: true,
@@ -24,8 +24,17 @@ const User =  mongoose.model('users' , new mongoose.Schema({
         require : true,
         minlength: 7,
         maxlength: 1024
-    } 
-}))
+    },
+    isAdmin : Boolean 
+    
+});
+usersSchema.methods.userToken = function () {
+    const token =  jwt.sign({_id : this._id }, config.get('jwtPrivateKey'))
+    return token;
+}
+
+const User =  mongoose.model('users' , usersSchema)
+
 
 
 

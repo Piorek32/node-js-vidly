@@ -14,15 +14,15 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+ 
   const { error } = validate(req.body);
   if (error) return res.status(404).send(error.details[0].message);
 
   const customer = await Customer.findById(req.body.customerId);
   if (!customer) return res.status(400).send("Invalid customer");
   const movie = await Movie.findById(req.body.movieId);
-  console.log(movie)
   if (!movie) return res.status().send("movie not found");
-
+ 
   if (movie.numberInStock === 0)
     return res.status(400).send("movie out of stock");
 
@@ -45,6 +45,8 @@ router.post("/", async (req, res) => {
     new Fawn.Task()
       .save("rentals", rental)
       .update("movies", { _id: movie._id }, { $inc: { numberInStock: -1 } })
+      .update("customers", { _id: customer._id }, { $addToSet : { rentals:  rental._id  } })
+      
       .run();
 
     res.send(rental);

@@ -9,17 +9,23 @@ const Joi = require("@hapi/joi");
 const jwt = require('jsonwebtoken')
 
 
+
 router.post("/", async (req, res) => {
+   
     const { error } = validateUser(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.status(400).send({ error : error.details[0].message});
   
     let user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status(400).send("Invali email or password");
+    if (!user) return res.status(400).send({ error : "Invali email or password"});
     const validPassword = await bcrypt.compare(req.body.password, user.password)
 
     if(!validPassword) return res.status(400).send("Invali email or password");
-    const token =  jwt.sign({_id : user._id }, config.get())
-    res.send(token)
+    //  const token =  jwt.sign({_id : user._id }, config.get('jwtPrivateKey'))
+    const token = user.userToken()
+    res.header('x-auth-token', token).send({ 
+        user : _.pick(user, ["name", "email"]),
+    token : token
+    });
   });
 
 

@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const { Movie, validate } = require("../models/movies")
 const { Genre } = require('../models/genre')
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
+
 
 
 router.get('/', async (req, res) => {
@@ -11,8 +14,9 @@ router.get('/', async (req, res) => {
 })
 
 
-router.post('/', async (req, res) => {
-    console.log(req.body)
+router.post('/', upload.single('avatar'),async (req, res) => {
+
+ 
     const { error } = validate(req.body); 
     if (error) return res.status(400).send(error.details[0].message);
   
@@ -26,17 +30,19 @@ router.post('/', async (req, res) => {
         name: genre.name
       },
       numberInStock: req.body.numberInStock,
-      dailyRentalRate: req.body.dailyRentalRate
+      dailyRentalRate: req.body.dailyRentalRate,
+      images : req.file.path
     });
     movie = await movie.save();
     
     res.send(movie);
   });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id',upload.single('avatar'), async (req, res) => {
     const {error} = validate(req.body)
     if (error) return res.send(error.details[0].message)
-    const genre = Genre.findById(req.body.genreId)
+    const genre = await Genre.findById(req.body.genreId)
+
     if (!genre)  return res.status(404).send('Invalid Genre')
     const movie = await Movie.findByIdAndUpdate(req.params.id, {
         title: req.body.title,
@@ -44,8 +50,9 @@ router.put('/:id', async (req, res) => {
             _id : genre._id,
             name : genre.name
         },
-        numberInStock : req.params.numberInStock,
-        dailyRentalRate : req.params.dailyRentalRate,
+        numberInStock : req.body.numberInStock,
+        dailyRentalRate : req.body.dailyRentalRate,
+        images : req.file.path
     }, {new : true})
 
     res.send(movie)

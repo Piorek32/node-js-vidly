@@ -1,0 +1,165 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.logo_link {
+  
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.main_nav {
+  
+    display: flex;
+    width: 100%;
+    background-color: black;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+.main_nav ul {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+
+.main_nav ul li {
+    color: #fff;
+    list-style: none;
+    padding: 20px;
+}
+
+li a {
+    font-size: 24px;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+}
+
+
+.main_movies {
+    height: 500px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.main_movies li {
+    flex-basis: 400px;
+    flex-grow: 1;
+    border: 1px solid black;
+    background: #f1f1f1;
+    list-style: none;
+ 
+
+}
+
+li.first {
+    background: black;
+}
+
+.hero {
+    overflow: hidden;
+    height: calc(100vh - 10vh);
+    width: 90%;
+    padding-top: 30px;
+    position: relative;
+    
+    margin: 0 auto;
+}
+.hero > div {
+    
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    left: -100%;
+
+}
+
+
+.hero > div.current {
+    
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+.hero > div.current span {
+    transition: 0.5s all;
+    top: 20px;
+}
+.hero > div img {
+    width: 100%;
+}
+.hero > div:first-of-type {
+    /* opacity: 1; */
+}
+
+div > span {
+    position: absolute;
+    color: #ffff;
+    top: -100px;
+    left: 20px;
+    font-size: 100px;
+}
+ul.chartContent {
+    display: none;
+    position: absolute;
+   
+
+}
+
+.chartContent th, td {
+    text-transform: uppercase;
+    padding: 0 10px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+
+.chartContent  td {
+    text-transform: none;
+    font-weight: 100;
+}
+
+.chartContent tr {
+    margin: 10px 0;
+}
+.chart:hover .chartContent {
+    padding: 25px;
+    z-index: 1;
+    display: flex;
+    background: black;
+    flex-direction: column;
+    right: 10px;
+
+}
+
+
+.removeMovie {
+    color: red;
+}
+
+
+
+button.confirmBtn {
+    font-size: 18px;
+    padding: 10px 0;
+    width: 100px;
+    align-self: flex-end;
+    border: none;
+    border-radius: 5%;
+    background: #fff;
+}

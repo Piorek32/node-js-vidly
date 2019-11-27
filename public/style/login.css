@@ -1,0 +1,148 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.logo_link {
+  
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    margin-left: 20px;
+}
+
+.main_nav {
+    display: flex;
+    width: 100%;
+    background-color: black;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+
+.main_nav ul {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+
+.main_nav ul li {
+    list-style: none;
+    padding: 20px;
+}
+
+li a {
+    font-size: 24px;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+}
+
+
+.containerForm {
+    display: flex;
+    justify-content: center;
+}
+
+.containerForm  form {
+    width: 80%;
+} 
+form input {
+    width: 100%;
+    border: none;
+    height: 100%;
+    outline: none;
+    font-size: 18px;
+    padding-top: 15px;
+    
+}
+
+
+.containerForm  form> div {
+    width: 80%;
+    height: 50px;
+    margin: 25px;
+    position: relative;
+} 
+
+label {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    pointer-events: none;
+    border-bottom: 1px solid black;
+    
+}
+
+label::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    background-color: blueviolet;
+    position: absolute;
+    bottom: -1px;
+    transition: ease-in-out 0.3s all;
+}
+
+span {
+    position: absolute;
+    bottom: 5px;
+    transition: ease-in-out 0.3s all;
+    font-size: 16px;
+
+}
+.submit_btn_box {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.submit_btn {
+    color: #fff !important;
+text-transform: uppercase;
+text-decoration: none;
+background: #60a3bc;
+padding: 20px;
+border-radius: 50px;
+display: inline-block;
+border: none;
+
+}
+
+
+.submit_btn:hover {
+    color: #60a3bc !important;
+    background: #fff;
+    border: 1px solid #60a3bc;
+    transition: all 0.4s ease 0s;
+}
+
+
+
+
+
+
+
+form input:focus + label span, form input:valid + label span  {
+    bottom: 30px;
+    font-size: 14px;
+}
+form input:focus + label::after  {
+    width: 100%;
+}
+
+
+/* 
+navigation */
+
+

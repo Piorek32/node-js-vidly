@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+</head>
+<link rel="stylesheet" href="./style/home.css">
+
+<body>
+
+
+    <header>
+      <nav class="main_nav">
+        <a  class="logo_link" href="index.html">Logo</a>
+        <ul>
+          <li><a href="login.html">login</a></li>
+          <li><a href="singin.html">Singin</a></li>
+          <li class="chart">koszyk
+            <ul class="chartContent">
+              <table>
+                <tbody class="chartTable">
+                  <tr>
+                    <th>tytul</th>
+                    <th>ilosc</th>
+                    <th>cena</th>
+                  </tr>
+                  <tr>
+                    <td>film 1</td>
+                    <td>1</td>
+                    <td>9.99</td>
+                  </tr>
+                </tbody>
+              </table>
+          
+          
+          <button class="confirmBtn">kupuje</button>
+            </ul>
+            
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+
+    <section class="hero">
+       
+
+    </section>
+
+
+  <!-- <script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", e => {
+      const name = document.querySelector(".name").value;
+      const email = document.querySelector(".email").value;
+      const password = document.querySelector(".password").value;
+      e.preventDefault();
+
+      const user = {
+        name,
+        email,
+        password
+      };
+      
+
+      fetch("http://localhost:8080/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(user)
+      })
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err =>  console.log(`errro is ${err}`));
+    });
+
+    // const pram =  new URLSearchParams({
+    //     name : "parametr"
+
+    // });
+
+    let url = "contact/125";
+    //   let link = document.querySelector('a')
+    // link.setAttribute('href', url)
+  </script> -->
+  <img class="img" src="" alt="">
+
+  <script src="./scripts/index.js"></script>
+</body>
